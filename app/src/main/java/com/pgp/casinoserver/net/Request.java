@@ -6,8 +6,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.pgp.casinoserver.net.packages.Package;
 import com.pgp.casinoserver.utils.BinaryUtils;
 
 import java.io.BufferedInputStream;
@@ -94,10 +92,10 @@ public class Request {
 
 
     // Этот конструктор предназначен только для исходящих данных/запросов
-    public Request(@NonNull RequestHeader header, @NonNull byte[] data){
+    public Request(@NonNull RequestHeader header, byte[] data){
         if (header == null) {Log.e(TAG, "Header in null"); return;}
         if (!header.isReady()) {Log.e(TAG, "Header is INVALID"); return;}
-        if (data == null) {Log.e(TAG, "Package is null"); return;}
+        if (data == null) {Log.e(TAG, "Package is null"); /*return;*/}
 
         mHeader = header;
         mPackage = data;

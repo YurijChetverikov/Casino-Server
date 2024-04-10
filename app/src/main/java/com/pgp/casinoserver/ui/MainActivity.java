@@ -20,8 +20,6 @@ import com.pgp.casinoserver.net.PackageType;
 import com.pgp.casinoserver.net.Request;
 import com.pgp.casinoserver.net.RequestHeader;
 import com.pgp.casinoserver.net.Transport;
-import com.pgp.casinoserver.net.packages.PlayerPackage;
-import com.pgp.casinoserver.net.services.TransportLayer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Transport transport;
-    private TransportLayer transportLayer;
 
 
     @Nullable
@@ -81,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         Player p = DataLoader.Singleton().GetCasinoPlayer();
 
-        PlayerPackage pak = new PlayerPackage(p);
-        Request r = new Request(RequestHeader.getGoodResponse(PackageType.PLAYER_FULL), pak);
 
         Log.e("", "dv");
     }
@@ -140,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void networkInit(){
         //transport = new Transport();
-        transportLayer = new TransportLayer(this);
     }
 
 

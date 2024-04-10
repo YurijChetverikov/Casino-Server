@@ -52,8 +52,7 @@ public class Transport {
                 while (mRunning) {
                     Socket client = server.accept();
 
-                    RequestManager manager = new RequestManager(client);
-                    manager.start();
+                    new RequestProcessor(client).start();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

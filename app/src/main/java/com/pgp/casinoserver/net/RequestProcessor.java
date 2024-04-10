@@ -8,24 +8,30 @@ import com.pgp.casinoserver.core.Player;
 import com.pgp.casinoserver.loaders.DataLoader;
 
 import java.io.IOException;
+import java.net.Socket;
 
-public class RequestProcessor {
+public class RequestProcessor extends Thread{
 
-    private static final String TAG = "RequestProcessor";
+    private final String TAG = "RequestProcessor";
+
+    private final Socket mClient;
 
     private static Request mError;
 
-    @NonNull
-    public static Request procced(@NonNull Request acceptedRequest){
+
+    public RequestProcessor(@NonNull Socket clientSocket){
+        mClient = clientSocket;
 
         RequestHeader h = new RequestHeader();
         h.Values.put(RequestHeaderValues.ERROR_CODE, (byte)1);
 
         mError = new Request(h, null);
+    }
 
+    @NonNull
+    private Request procced(@NonNull Request acceptedRequest){
         if (acceptedRequest == null) return mError;
         if (!acceptedRequest.isSuccess()) return mError;
-//        if (acceptedRequest.getHeader().Values.get(RequestHeaderValues.REQUEST_TYPE) != RequestType.GET) return mError;
 
         try{
             switch ((PackageType)acceptedRequest.getHeader().Values.get(RequestHeaderValues.PACKAGE_TYPE)){
@@ -61,7 +67,7 @@ public class RequestProcessor {
         Player founded = DataLoader.Singleton().GetPlayerById((int)req.getHeader().Values.get(RequestHeaderValues.PLAYER_ID));
         if (founded != null){
             if (founded.Password == (int)req.getHeader().Values.get(RequestHeaderValues.PLAYER_PASSWORD)){
-                Request res = new Request(h, founded.getBytes());
+                return new Request(h, founded.getBytes());
             }else{
                 mError.getHeader().Values.replace(RequestHeaderValues.ERROR_CODE, (byte)14);
                 return mError;
@@ -71,8 +77,26 @@ public class RequestProcessor {
             mError.getHeader().Values.replace(RequestHeaderValues.ERROR_CODE, (byte)13);
             return mError;
         }
+    }
 
-        return res;
 
+    private void writeResponse(Request response){
+
+    }
+
+    @Override
+    public void start() {
+        if (mClient == null){ writeResponse(mError); return; }
+
+        try {
+            Request req = new Request(mClient.getInputStream());
+            if (!req.isSuccess()) {writeResponse(mError); return;}
+            writeResponse(procced(req));
+            return;
+        }catch (IOException e) {
+            Log.e(TAG, e.toString());
+        }
+
+        writeResponse(mError);
     }
 }
