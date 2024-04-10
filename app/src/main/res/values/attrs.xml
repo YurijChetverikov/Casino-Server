@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AnimatedCircleLoadingView">
+        <attr name="animCircleLoadingView_mainColor" format="color" localization="suggested" />
+        <attr name="animCircleLoadingView_secondaryColor" format="color" localization="suggested" />
+        <attr name="animCircleLoadingView_checkMarkTintColor" format="color" localization="suggested" />
+        <attr name="animCircleLoadingView_failureMarkTintColor" format="color" localization="suggested" />
+        <attr name="animCircleLoadingView_textColor" format="color" localization="suggested" />
+    </declare-styleable>
+
+    <declare-styleable name="TransitionButton">
+        <attr name="defaultColor" format="string" />
+        <attr name="loaderColor" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableLayout">
+        <attr name="el_duration" format="integer" />
+        <attr name="el_expanded" format="boolean" />
+        <attr name="el_parallax" format="float" />
+        <attr name="android:orientation"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.TransactionFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Платежи и переводы"
+                    android:textAlignment="center"
+                    android:textColor="@color/theme_gray_4"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/receiver_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:ems="10"
+                    android:hint="ID получателя"
+                    android:maxLength="6"
+                    android:inputType="number|numberDecimal"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/theme_gray_2"
+                    android:backgroundTint="@color/theme_orange_2" />
+
+                <TextView
+                    android:id="@+id/receiver_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/theme_gray_2"/>
+
+                <EditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="Сумма"
+                    android:maxLength="6"
+                    android:textColorHint="@color/theme_gray_2"
+                    android:textColor="@color/black"
+                    android:inputType="number|numberDecimal"
+                    android:backgroundTint="@color/theme_orange_2"
+                    />
+
+                <Spinner
+                    android:id="@+id/transactionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/theme_gray_5"
+                    android:popupBackground="@color/theme_gray_0.5"
+                    />
+
+                <EditText
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:ems="10"
+                    android:maxLength="511"
+                    android:textColorHint="@color/theme_gray_2"
+                    android:textColor="@color/black"
+                    android:hint="Комментарий к переводу"
+                    android:backgroundTint="@color/theme_orange_2"
+                    android:maxLines="5" />
+
+
+                <TextView
+                    android:id="@+id/transactionCommission"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/theme_gray_4"
+                    android:text="Комиссия вкьвр" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/separator_line"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:id="@+id/totalAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/theme_orange_2"
+                    android:text="Итого к переводу: 0" />
+
+                <Button
+                    android:id="@+id/confirmButton"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/theme_orange_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:text="Оплатить" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

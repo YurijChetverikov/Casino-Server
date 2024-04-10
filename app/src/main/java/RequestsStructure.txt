@@ -1,0 +1,14 @@
+Request:
+
+Header:
+    1 байт - кол-во Key-Value пар
+    (тут пары: Key - Value):
+    Обязательно:
+    2 байта - (Key - 1); (Value - request type (0 - неизвестный, 1 - GET(Направляем запрос на сервер), 2 - RESPONSE(Ответ от сервера)))
+    2 байта - (Key - 2); (Value - package type (0 - неизвестный, 1 - FullPlayerPackage))
+    Необязательно:
+    5 байт - (Key - 3); (Value - playerID (int32) "ID")
+    5 байт - (Key - 4); (Value - playerPassword (int32) "PASS")
+
+Data:
+    Package

@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">Casino Server</string>
+
+    <string name="navDrawer_Open">Открыть</string>
+    <string name="navDrawer_Close">Закрыть</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password_length">Длина пароля должна быть 4 цифры!</string>
+    <string name="invalid_password_content">Пароль не может состоять из нулей!</string>
+    <string name="invalid_balance">Поле баланса не должно быть пустым</string>
+    <string name="invalid_money_amount">Сумма должна быть больше нуля!</string>
+    <string name="invalid_name">Имя должно содержать не менее 1 символа</string>
+    <string name="login_failed">"Login failed"</string>
+
+
+    <string name="action_register">Зарегистрироваться</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_add">Добавить</string>
+    <string name="prompt_casino_name">Название казино</string>
+
+
+    <string name="prompt_player_name">Имя игрока</string>
+    <string name="prompt_player_start_balance">Стартовый баланс</string>
+
+
+    <string name="prompt_comission">Комиссия (в %)</string>
+
+    <string name="prompt_casino_balance">Стартовый баланс</string>
+    <string name="prompt_player_balance">Баланс</string>
+
+    <string name="missing_player_with_id">Игрока с таким ID не существует!</string>
+
+
+    <string name="info_available">Доступно</string>
+    <string name="info_unavailable">Недоступно</string>
+    <string name="info_invited">Приглашён</string>
+    <string name="info_connected">Подключён</string>
+    <string name="info_failed">Failed</string>
+    <string name="info_unknown">Неизвестно</string>
+
+
+    <string name="prompt_password">Пароль</string>
+    <string name="title_game_adding">Добавление игры</string>
+    <string name="title_game_renaming">Переименование игры</string>
+
+    <string name="title_games_list">Список игр:</string>
+    <string name="action_add_game">Добавить</string>
+    <string name="action_create">Создать</string>
+    <string name="action_edit">Изменить</string>
+    <string name="prompt_add_game">Название игры</string>
+    <string name="invalid_game_name">Название игры должно содержать не менее 1 символа</string>
+
+    <string name="create_player_title">Создать игрока</string>
+    <string name="edit_player_title">Править игрока</string>
+
+    <string name="player_did_not_exists">Выбранный игрок не существует!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_not_enough_money">На счету недостаточно средств!</string>
+    <string name="dummy_string">Dummy</string>
+
+
+    <string name="menu_home">Главная</string>
+    <string name="menu_gameroom">Игровая</string>
+    <string name="menu_transactions">Переводы</string>
+    <string name="menu_profile">Профиль</string>
+    <string name="menu_transactions_history">История</string>
+    <string name="menu_players_list">Игроки</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="info_loading">Загрузка...</string>
+</resources>
