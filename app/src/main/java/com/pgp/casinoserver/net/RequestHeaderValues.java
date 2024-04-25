@@ -6,8 +6,8 @@ public enum RequestHeaderValues {
     PACKAGE_TYPE,
     PLAYER_ID,
     PLAYER_PASSWORD,
-    REQUEST_CODE,
-    ERROR_CODE;
+    ERROR_CODE,
+    LAST_TRANSACTIONS_HISTORY_INDEX;
 
 
 
@@ -22,9 +22,9 @@ public enum RequestHeaderValues {
             case 4:
                 return PLAYER_PASSWORD;
             case 5:
-                return REQUEST_CODE;
-            case 6:
                 return ERROR_CODE;
+            case 6:
+                return LAST_TRANSACTIONS_HISTORY_INDEX;
             default:
                 return INVALID;
         }

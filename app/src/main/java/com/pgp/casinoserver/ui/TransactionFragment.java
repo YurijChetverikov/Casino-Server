@@ -77,8 +77,10 @@ public class TransactionFragment extends Fragment {
 
         button = parentView.findViewById(R.id.confirmButton);
         receiverIdView = parentView.findViewById(R.id.receiver_id);
+        receiverIdView.setTransformationMethod(null);
         receiverNameView = parentView.findViewById(R.id.receiver_name);
         amountView = parentView.findViewById(R.id.amount);
+        amountView.setTransformationMethod(null);
         typeView = parentView.findViewById(R.id.transactionType);
         descView = parentView.findViewById(R.id.desc);
         comissionView = parentView.findViewById(R.id.transactionCommission);

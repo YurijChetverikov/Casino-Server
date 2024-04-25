@@ -32,7 +32,7 @@
             android:id="@+id/balanceView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:hint="@string/prompt_player_start_balance"
             android:maxLength="10"
             android:text="">
@@ -52,7 +52,7 @@
             android:id="@+id/passwordView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="4"
             android:hint="@string/prompt_password"
             android:text="">

@@ -63,7 +63,9 @@ public class PlayersListFragment extends Fragment {
                 View dialogView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.dialog3f_layout, null);
                 TextInputEditText nameView = dialogView.findViewById(R.id.nameView);
                 TextInputEditText balanceView = dialogView.findViewById(R.id.balanceView);
+                balanceView.setTransformationMethod(null);
                 TextInputEditText passwordView = dialogView.findViewById(R.id.passwordView);
+                passwordView.setTransformationMethod(null);
                 AlertDialog alertDialog = new MaterialAlertDialogBuilder(parentView.getContext())
                         .setTitle(getString(R.string.create_player_title))
                         .setView(dialogView)
@@ -151,13 +153,15 @@ public class PlayersListFragment extends Fragment {
         TextView idView = view.findViewById(R.id.id);
         TextView passwordView = view.findViewById(R.id.password);
         TextView balanceView = view.findViewById(R.id.balance);
-        TextView joinDateView = view.findViewById(R.id.joinDate);
+        //TextView joinDateView = view.findViewById(R.id.joinDate);
         //RecyclerView transactionView = view.findViewById(R.id.list);
         Button closeButton = view.findViewById(R.id.close);
         Button editPlayerButton = view.findViewById(R.id.editPlayer);
         Button openTransactionsButton = view.findViewById(R.id.openTransactions);
         Button addToGameroom = view.findViewById(R.id.addToGameroom);
         Button makeTransaction = view.findViewById(R.id.makeTransaction);
+        Button withdrawalButton = view.findViewById(R.id.withdrawal);
+        Button depositButton = view.findViewById(R.id.deposit);
 
         if (DataLoader.Singleton().PlayersInGameRoom.contains(pl)){
             addToGameroom.setEnabled(false);
@@ -169,6 +173,10 @@ public class PlayersListFragment extends Fragment {
             addToGameroom.setVisibility(View.GONE);
             makeTransaction.setEnabled(false);
             makeTransaction.setVisibility(View.GONE);
+            withdrawalButton.setEnabled(false);
+            withdrawalButton.setVisibility(View.GONE);
+            depositButton.setEnabled(false);
+            depositButton.setVisibility(View.GONE);
             nameView.setTextColor(context.getResources().getColor(R.color.gold, null));
         }
 
@@ -177,7 +185,7 @@ public class PlayersListFragment extends Fragment {
         idView.setText("ID: " + Long.toString(pl.ID));
         passwordView.setText("Пароль: ****"); //
 
-        joinDateView.setText("Дата вступления: " + pl.GetRegistrationDateString());
+        //joinDateView.setText("Дата вступления: " + pl.GetRegistrationDateString());
 
 
         passwordView.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +218,14 @@ public class PlayersListFragment extends Fragment {
             }
         });
 
+        depositButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                MainActivity.Singleton().OpenFragment(new CashActionsFragment(true, pl ));
+            }
+        });
+
         editPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,7 +234,9 @@ public class PlayersListFragment extends Fragment {
                 View dialogView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.dialog3f_layout, null);
                 TextInputEditText nameView = dialogView.findViewById(R.id.nameView);
                 TextInputEditText balanceView = dialogView.findViewById(R.id.balanceView);
+                balanceView.setTransformationMethod(null);
                 TextInputEditText passwordView = dialogView.findViewById(R.id.passwordView);
+                passwordView.setTransformationMethod(null);
                 TextInputLayout balanceLayout = dialogView.findViewById(R.id.balanceViewLayout);
 
                 nameView.setText(pl.Name);

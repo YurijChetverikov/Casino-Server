@@ -37,7 +37,6 @@ public class Player {
         Balance = balance;
     }
 
-
     public String GetRegistrationDateString(){
         return sdf.format(RegistrationDate);
     }

@@ -48,6 +48,8 @@ public class SettingsFragment extends Fragment {
     private RecyclerView gamesView;
     private Button addGameButton;
     private TextInputEditText comissionView;
+    private TextInputEditText withdrawalComissionView;
+    private TextInputEditText depositComissionView;
     private ImageView casinoImage;
 
     public SettingsFragment() {
@@ -71,6 +73,11 @@ public class SettingsFragment extends Fragment {
 
         addGameButton = parentView.findViewById(R.id.add_game_button);
         comissionView = parentView.findViewById(R.id.comission_field);
+        comissionView.setTransformationMethod(null);
+        withdrawalComissionView = parentView.findViewById(R.id.withdrawal_comission);
+        withdrawalComissionView.setTransformationMethod(null);
+        depositComissionView = parentView.findViewById(R.id.deposit_comission);
+        depositComissionView.setTransformationMethod(null);
         gamesView = parentView.findViewById(R.id.games_list);
         casinoImage = parentView.findViewById(R.id.imageView);
 
@@ -147,6 +154,67 @@ public class SettingsFragment extends Fragment {
         });
 
         comissionView.setText(Byte.toString(DataLoader.Singleton().TransactionComission));
+
+
+        withdrawalComissionView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (withdrawalComissionView.getText().toString().length() > 0){
+                    byte newComission = Byte.parseByte(withdrawalComissionView.getText().toString());
+
+                    if (newComission != DataLoader.Singleton().WithdrawalComission){
+                        DataLoader.Singleton().WithdrawalComission = newComission;
+                        try {
+                            DataLoader.Singleton().WriteTableCache(parentView.getContext());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        });
+
+        withdrawalComissionView.setText(Byte.toString(DataLoader.Singleton().WithdrawalComission));
+
+        depositComissionView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (depositComissionView.getText().toString().length() > 0){
+                    byte newComission = Byte.parseByte(depositComissionView.getText().toString());
+
+                    if (newComission != DataLoader.Singleton().DepositComission){
+                        DataLoader.Singleton().DepositComission = newComission;
+                        try {
+                            DataLoader.Singleton().WriteTableCache(parentView.getContext());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        });
+
+        depositComissionView.setText(Byte.toString(DataLoader.Singleton().DepositComission));
 
         updateGamesList();
 

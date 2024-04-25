@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity singleton;
 
 
-    private Transport transport;
+    private Transport transport = null;
 
 
     @Nullable
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        transport = new Transport(getApplicationContext());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         networkInit();
 
         Player p = DataLoader.Singleton().GetCasinoPlayer();
-
 
         Log.e("", "dv");
     }
