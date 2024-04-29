@@ -20,8 +20,6 @@ import com.pgp.casinoserver.net.PackageType;
 import com.pgp.casinoserver.net.Request;
 import com.pgp.casinoserver.net.RequestHeader;
 import com.pgp.casinoserver.net.Transport;
-import com.pgp.casinoserver.net.packages.PlayerPackage;
-import com.pgp.casinoserver.net.services.TransportLayer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity singleton;
 
 
-    private Transport transport;
-    private TransportLayer transportLayer;
+    private Transport transport = null;
 
 
     @Nullable
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        transport = new Transport(getApplicationContext());
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }else if (item.getItemId() == R.id.settings){
                 OpenFragment(new SettingsFragment());
             }else if (item.getItemId() == R.id.playersList){
-                OpenFragment(new PlayersListFragment());
+                OpenFragment(new PlayersListFragment(this));
             }else if (item.getItemId() == R.id.gameroom){
                 OpenFragment(new GameroomFragment());
             }
@@ -80,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
         networkInit();
 
         Player p = DataLoader.Singleton().GetCasinoPlayer();
-
-        PlayerPackage pak = new PlayerPackage(p);
-        Request r = new Request(RequestHeader.getGoodResponse(PackageType.PLAYER_FULL), pak);
 
         Log.e("", "dv");
     }
@@ -140,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void networkInit(){
         //transport = new Transport();
-        transportLayer = new TransportLayer(this);
     }
 
 

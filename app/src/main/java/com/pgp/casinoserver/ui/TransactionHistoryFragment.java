@@ -114,30 +114,43 @@ public class TransactionHistoryFragment extends Fragment {
         String amountString = "";
         String titleString = "";
         String receiverString = "";
-        if (t.Receiver != null && t.Sender != null){
+        if (t.Receiver != null){
+            if (t.Receiver.ID == currentPlayer.ID){
+                amountString = "+ ";
+                amountString+= Integer.toString(t.Amount);
+                if (t.Sender != null){
+                    titleString = t.Sender.Name;
+                    receiverString = Long.toString( t.Sender.ID);
+                }
+                titleAmount.setTextColor(context.getResources().getColor(R.color.light_green, null));
+            }
+            receiverName.setText(t.Receiver.Name);
+            receiverId.setText(Long.toString(t.Receiver.ID));
+
+        }
+        receiverAmount.setText("Было получено: " + Integer.toString(t.Amount));
+        if (t.Sender != null){
             if(t.Sender.ID == currentPlayer.ID){
                 amountString = "- ";
                 amountString+= Integer.toString(t.SenderPaid);
-                titleString = t.Receiver.Name;
-                receiverString = Integer.toString( t.Receiver.ID);
-            }else if (t.Receiver.ID == currentPlayer.ID){
-                amountString = "+ ";
-                amountString+= Integer.toString(t.Amount);
-                titleString = t.Sender.Name;
-                receiverString = Long.toString( t.Sender.ID);
-                titleAmount.setTextColor(context.getResources().getColor(R.color.light_green, null));
+                if (t.Receiver != null){
+                    titleString = t.Receiver.Name;
+                    receiverString = Integer.toString( t.Receiver.ID);
+                }
             }
+            senderName.setText(t.Sender.Name);
+            senderId.setText(Long.toString(t.Sender.ID));
+
         }
+        senderAmount.setText("Было отправлено: " + Integer.toString(t.SenderPaid));
         titleAmount.setText(amountString);
         titleId.setText(receiverString);
         titleName.setText(titleString);
 
-        senderName.setText(t.Sender.Name);
-        senderId.setText(Long.toString(t.Sender.ID));
-        receiverName.setText(t.Receiver.Name);
-        receiverId.setText(Long.toString(t.Receiver.ID));
-        senderAmount.setText("Было отправлено: " + Integer.toString(t.SenderPaid));
-        receiverAmount.setText("Было получено: " + Integer.toString(t.Amount));
+
+
+
+
         type.setText("Тип: " + t.Type.GetName());
         desc.setText(t.Description);
     }

@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:textColor="@color/white"
+    android:textColor="@color/theme_gray_5"
     android:textSize="16sp"
     android:text="Item"
     android:textStyle="normal"

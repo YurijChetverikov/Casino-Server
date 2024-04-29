@@ -16,6 +16,7 @@ import com.pgp.casinoserver.core.Transaction;
 import com.pgp.casinoserver.core.TransactionType;
 import com.pgp.casinoserver.ui.MainActivity;
 import com.pgp.casinoserver.utils.BinaryUtils;
+import com.pgp.casinoserver.utils.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -43,8 +44,11 @@ public class DataLoader {
     public Game CurrentGame = null;
 
     public byte TransactionComission = 0; // В процентах
+    public byte WithdrawalComission = 0; // В процентах
+    public byte DepositComission = 0; // В процентах
 
 
+    private String TAG = "Data Loader";
 
 
     public int CasinoPlayerID = -1;
@@ -53,6 +57,8 @@ public class DataLoader {
     final String PLAYERS_TABLE_FILENAME = "pl.bin";
     final String BIG_DATA_FILENAME = "big_data.dat";
     final String CASINO_IMAGE_FILENAME = "pic.dat";
+
+    private boolean busy;
 
 
 //    public CacheProcessor(){
@@ -72,8 +78,13 @@ public class DataLoader {
         return Singleton;
     }
 
+    public boolean isBusy(){
+        return busy;
+    }
+
     // Пишет и файл и игроками, и файл с их данными
     public void WriteAllCahce(@NonNull Context context) throws IOException {
+        busy = true;
         setSavingTitle(true);
         WriteTableCache(context);
         setSavingTitle(true);
@@ -82,27 +93,33 @@ public class DataLoader {
             setSavingTitle(true);
         }
         setSavingTitle(false);
+        busy = false;
     }
 
     public void WriteTableCache(@NonNull Context context) throws IOException{
+        busy = true;
         setSavingTitle(true);
         FileOutputStream stream = context.openFileOutput(PLAYERS_TABLE_FILENAME, Context.MODE_PRIVATE);
         stream.write(getPlayersTable());
         stream.close();
         setSavingTitle(false);
+        busy = false;
     }
 
 
     // Пишет и файл с данными игроков
     public void WriteDataCahce(@NonNull Context context, @NonNull Player player) throws IOException {
+        busy = true;
         setSavingTitle(true);
         FileOutputStream stream = context.openFileOutput(String.format("pl%d.dat", player.ID), Context.MODE_PRIVATE);
         stream.write(getPlayerData(player));
         stream.close();
         setSavingTitle(false);
+        busy = false;
     }
 
     public void WriteCasinoImageCache(@NonNull Context context) throws IOException{
+        busy = true;
         FileOutputStream stream = context.openFileOutput(CASINO_IMAGE_FILENAME, Context.MODE_PRIVATE);
         if (CompressedBitmap != null){
             stream.write(CompressedBitmap);
@@ -110,16 +127,18 @@ public class DataLoader {
             stream.write(0);
         }
         stream.close();
+        busy = false;
     }
 
     public void WriteBigDataCache(@NonNull Context context) throws IOException{
+        busy = true;
         setSavingTitle(true);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         outputStream.write(BinaryUtils.Int2Bytes(Transactions.size()));
         for (Map.Entry<Integer, Transaction> t: Transactions.entrySet()){
             outputStream.write(BinaryUtils.Int2Bytes(t.getKey()));
-            outputStream.write(BinaryUtils.Int2Bytes(t.getValue().Sender.ID));
-            outputStream.write(BinaryUtils.Int2Bytes(t.getValue().Receiver.ID));
+            outputStream.write((byte[])((t.getValue().Sender != null) ? (BinaryUtils.Int2Bytes(t.getValue().Sender.ID)) : (BinaryUtils.Int2Bytes(-1))));
+            outputStream.write((byte[])((t.getValue().Receiver != null) ? (BinaryUtils.Int2Bytes(t.getValue().Receiver.ID)) : (BinaryUtils.Int2Bytes(-1))));
             outputStream.write(BinaryUtils.Int2Bytes(t.getValue().Amount));
             outputStream.write(BinaryUtils.Int2Bytes(t.getValue().SenderPaid));
             outputStream.write((byte)t.getValue().Type.ordinal());
@@ -131,50 +150,61 @@ public class DataLoader {
         stream.close();
 
         setSavingTitle(false);
+        busy = false;
     }
 
 
-    public CacheReadingResult ReadCache(@NonNull Context context) throws IOException {
+    public CacheReadingResult ReadCache(@NonNull Context context) {
         // Алгоритм такой:
         // Считываем игроков
         // Считываем big data (то есть все транзакции)
         // Считываем данные игроком (то есть id транзакций, принадлежащих им, игровые сессии)
 
         FileInputStream fin = null;
+        ByteBuffer b = null;
         byte[] bytes = null;
         try{
             fin = context.openFileInput(PLAYERS_TABLE_FILENAME);
         }catch(Exception ex){
             return CacheReadingResult.NOT_READED;
         }
-        bytes = new byte[fin.available()];
-        fin.read(bytes);
-        fin.close();
-        ByteBuffer b = ByteBuffer.wrap(bytes);
-        b.position(16);
-        Player pl = parsePlayer(b);
-        if (pl != null){
-            pl = parsePlayerData(pl, context);
-            CasinoPlayerID = pl.ID;
-            pl.IsCasino = true;
-            Players.add(pl);
 
-            byte gamesCount = b.get();
-            for(byte i = 0; i < gamesCount; i++){
-                Game g = new Game();
-                g.ID = b.get();
-                g.Name = BinaryUtils.ReadString(b);
-                Games.add(g);
-            }
-
-            TransactionComission = b.get();
-
-            int playersCount = b.getInt();
-            for(int i = 0; i < playersCount; i++){
-                pl = parsePlayer(b);
+        try {
+            bytes = new byte[fin.available()];
+            fin.read(bytes);
+            fin.close();
+            b = ByteBuffer.wrap(bytes);
+            b.position(16);
+            Player pl = parsePlayer(b);
+            if (pl != null) {
                 pl = parsePlayerData(pl, context);
+                CasinoPlayerID = pl.ID;
+                pl.IsCasino = true;
                 Players.add(pl);
+
+                byte gamesCount = b.get();
+                for (byte i = 0; i < gamesCount; i++) {
+                    Game g = new Game();
+                    g.ID = b.get();
+                    g.Name = BinaryUtils.ReadString(b);
+                    Games.add(g);
+                }
+
+                TransactionComission = b.get();
+                WithdrawalComission = b.get();
+                DepositComission = b.get();
+
+                int playersCount = b.getInt();
+                for (int i = 0; i < playersCount; i++) {
+                    pl = parsePlayer(b);
+                    pl = parsePlayerData(pl, context);
+                    Players.add(pl);
+                }
+                }
+            } catch (Exception e) {
+                Logger.LogError(TAG, e);
             }
+
 
             // Теперь считываем big data
 
@@ -183,14 +213,19 @@ public class DataLoader {
 
             // Считываем картинку казина
 
-            fin = context.openFileInput(CASINO_IMAGE_FILENAME);
-            if (fin.available() > 4){
-                bytes = new byte[fin.available()];
-                fin.read(bytes);
-                fin.close();
-                b = ByteBuffer.wrap(bytes);
-                CompressedBitmap = b.array();
-                casinoBitmap = BitmapFactory.decodeByteArray(CompressedBitmap, 0, CompressedBitmap.length);
+            try{
+
+                fin = context.openFileInput(CASINO_IMAGE_FILENAME);
+                if (fin.available() > 4){
+                    bytes = new byte[fin.available()];
+                    fin.read(bytes);
+                    fin.close();
+                    b = ByteBuffer.wrap(bytes);
+                    CompressedBitmap = b.array();
+                    casinoBitmap = BitmapFactory.decodeByteArray(CompressedBitmap, 0, CompressedBitmap.length);
+                }
+            }catch(IOException e){
+                Logger.LogError(TAG, e);
             }
 
 
@@ -198,9 +233,10 @@ public class DataLoader {
 
 
 
+
             return CacheReadingResult.READED_SUCCESSFULLY;
-        }
-        return CacheReadingResult.READED_WITH_ERRORS;
+
+//        return CacheReadingResult.READED_WITH_ERRORS;
     }
 
 
@@ -291,6 +327,8 @@ public class DataLoader {
             }
 
             outputStream.write(TransactionComission);
+            outputStream.write(WithdrawalComission);
+            outputStream.write(DepositComission);
             outputStream.write(BinaryUtils.Int2Bytes(Players.size() - 1));
 
             for (Player pl: Players) {
@@ -331,13 +369,17 @@ public class DataLoader {
                 t.Type = TransactionType.Get((int)b.get());
                 t.Description = BinaryUtils.ReadString(b);
                 Transactions.put(transID, t);
-                GetPlayerById(senderId).Transactions.add(Transactions.get(transID));
-                GetPlayerById(receiverId).Transactions.add(Transactions.get(transID));
+                if (t.Sender != null){
+                    t.Sender.Transactions.add(Transactions.get(transID));
+                }
+                if (t.Receiver != null){
+                    t.Receiver.Transactions.add(Transactions.get(transID));
+                }
             }
 
 
         }catch(Exception ex){
-            Log.e("package:mine", ex.toString());
+            Logger.LogError(TAG, ex);
         }
     }
 
@@ -389,10 +431,10 @@ public class DataLoader {
     }
 
     public int getNextTransactionID(){
-        if (Transactions.keySet().size() == 0){
-            return 0;
-        }
-        return (int)Transactions.keySet().toArray()[Transactions.keySet().size() - 1];
+//        if (Transactions.keySet().size() == 0){
+//            return 0;
+//        }
+        return (int)Transactions.keySet().size();
     }
 
 
@@ -417,28 +459,26 @@ public class DataLoader {
     public void setCasinoBitmap(@NonNull Bitmap newImage){
         casinoBitmap = newImage.copy(newImage.getConfig(), true);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        newImage.compress(Bitmap.CompressFormat.WEBP, 100, stream);
+        newImage.compress(Bitmap.CompressFormat.WEBP, 50, stream);
         CompressedBitmap = stream.toByteArray();
         newImage.recycle();
-
-
     }
 
 
     private boolean isSaving = false;
     private String oldTitle;
     private void setSavingTitle(boolean saving){
-        if (MainActivity.Singleton() != null){
-            if (isSaving != saving){
-                if (isSaving == true){
-                    //MainActivity.Singleton().setToolbarTitle(oldTitle);
-                }else{
-                    //oldTitle = MainActivity.Singleton().getToolbarTitle();
-                    //MainActivity.Singleton().setToolbarTitle( oldTitle + " (Сохр.)");
-                }
-            }
-        }
-        isSaving = saving;
+//        if (MainActivity.Singleton() != null){
+//            if (isSaving != saving){
+//                if (isSaving == true){
+//                    //MainActivity.Singleton().setToolbarTitle(oldTitle);
+//                }else{
+//                    //oldTitle = MainActivity.Singleton().getToolbarTitle();
+//                    //MainActivity.Singleton().setToolbarTitle( oldTitle + " (Сохр.)");
+//                }
+//            }
+//        }
+//        isSaving = saving;
     }
 }
 

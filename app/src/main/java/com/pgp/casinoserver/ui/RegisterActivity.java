@@ -31,7 +31,9 @@ public class RegisterActivity extends AppCompatActivity{
 
         nameView = findViewById(R.id.casinoName_field);
         balanceView = findViewById(R.id.casinoBalance_field);
+        balanceView.setTransformationMethod(null);
         passwordView = findViewById(R.id.casinoPassword_field);
+        passwordView.setTransformationMethod(null);
         regiserButton = findViewById(R.id.reg_button);
 
         regiserButton.setOnClickListener(new View.OnClickListener() {

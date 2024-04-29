@@ -41,7 +41,7 @@
                     android:ems="10"
                     android:hint="ID получателя"
                     android:maxLength="6"
-                    android:inputType="number|numberDecimal"
+                    android:inputType="numberPassword"
                     android:textColor="@color/black"
                     android:textColorHint="@color/theme_gray_2"
                     android:backgroundTint="@color/theme_orange_2" />
@@ -63,7 +63,7 @@
                     android:maxLength="6"
                     android:textColorHint="@color/theme_gray_2"
                     android:textColor="@color/black"
-                    android:inputType="number|numberDecimal"
+                    android:inputType="numberPassword"
                     android:backgroundTint="@color/theme_orange_2"
                     />
 

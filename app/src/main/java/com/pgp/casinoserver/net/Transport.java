@@ -1,5 +1,9 @@
 package com.pgp.casinoserver.net;
 
+import android.content.Context;
+
+import com.pgp.casinoserver.utils.Logger;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -12,13 +16,18 @@ public class Transport {
     private InetAddress mAddress = null;
     private Server mServer;
 
+    private Context context;
 
-    public Transport(){
+    private final String TAG = "Transport layer";
+
+
+    public Transport(Context context){
 //        try {
 //            mAddress = InetAddress.getLocalHost();
 //        } catch (UnknownHostException e) {
 //            throw new RuntimeException(e);
 //        }
+        this.context = context;
         mServer = new Server();
         mServer.start();
     }
@@ -51,12 +60,10 @@ public class Transport {
 
                 while (mRunning) {
                     Socket client = server.accept();
-
-                    RequestManager manager = new RequestManager(client);
-                    manager.start();
+                    new RequestProcessor(client, context).start();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.LogError(TAG, e);
             }
         }
 

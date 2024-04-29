@@ -53,17 +53,24 @@ public class TransactionsTableAdapter extends RecyclerView.Adapter<TransactionsT
         String amountString = "";
         String titleString = t.Type.GetName();
         String receiverString = "";
-        if (t.Receiver != null && t.Sender != null){
+        if (t.Sender != null){
             if(t.Sender.ID == player.ID){
                 amountString = "- ";
                 amountString+= Integer.toString(t.SenderPaid);
-                titleString+= " игроку " + t.Receiver.Name;
-                receiverString = Integer.toString( t.Receiver.ID);
-            }else if (t.Receiver.ID == player.ID){
+                if (t.Receiver != null){
+                    titleString+= " игроку " + t.Receiver.Name;
+                    receiverString = Integer.toString( t.Receiver.ID);
+                }
+            }
+        }
+        if (t.Receiver != null){
+            if (t.Receiver.ID == player.ID){
                 amountString = "+ ";
                 amountString+= Integer.toString(t.Amount);
-                titleString+= " от " + t.Sender.Name;
-                receiverString = Integer.toString( t.Sender.ID);
+                if (t.Sender != null) {
+                    titleString += " от " + t.Sender.Name;
+                    receiverString = Integer.toString(t.Sender.ID);
+                }
                 holder.amountView.setTextColor(context.getResources().getColor(R.color.light_green, null));
             }
         }

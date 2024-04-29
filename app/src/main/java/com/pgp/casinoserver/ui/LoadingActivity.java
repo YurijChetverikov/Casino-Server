@@ -46,7 +46,7 @@ public class LoadingActivity extends AppCompatActivity {
         super.onResume();
 
         // Читаем кэш, если он существует
-        try {
+//        try {
             CacheReadingResult res = DataLoader.Singleton().ReadCache(getApplicationContext());
             if (res == CacheReadingResult.READED_SUCCESSFULLY){
                 // Кэш успешно прочитали, можем загружать активити входа
@@ -58,11 +58,11 @@ public class LoadingActivity extends AppCompatActivity {
                 // Кэша нет => создаём новое казино
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
-        } catch (IOException e) {
-            DataLoader.Singleton().Players.clear();
-
-            Log.e("package:mine", "пизда\n" + e.toString());
-        }
+//        } catch (IOException e) {
+//            DataLoader.Singleton().Players.clear();
+//
+//            Log.e("package:mine", "пизда\n" + e.toString());
+//        }
     }
 
 

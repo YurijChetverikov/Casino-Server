@@ -65,15 +65,6 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/joinDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                android:text="TextView"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
 
 
 
@@ -128,6 +119,33 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"
                     android:text="Добавить в игру" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp">
+
+                <Button
+                    android:id="@+id/withdrawal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:text="Вывести средства" />
+
+                <Button
+                    android:id="@+id/deposit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="Внести средства" />
 
 
             </LinearLayout>

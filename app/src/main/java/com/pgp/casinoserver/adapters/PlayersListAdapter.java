@@ -43,6 +43,8 @@ public class PlayersListAdapter extends RecyclerView.Adapter<PlayersListAdapter.
         Player player = players.get(position);
         if (player.IsCasino){
             holder.nameView.setTextColor(context.getResources().getColor(R.color.gold, null));
+        }else{
+            holder.nameView.setTextColor(context.getResources().getColor(R.color.white, null));
         }
         holder.nameView.setText(player.Name);
         holder.balanceView.setText(Integer.toString(player.Balance));

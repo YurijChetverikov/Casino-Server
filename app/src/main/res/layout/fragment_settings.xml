@@ -55,13 +55,55 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/comission_field"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
 
                     android:maxLength="3"
                     android:hint="@string/prompt_comission"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/withdrawal_comission"
+                    android:inputType="numberPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+
+                    android:maxLength="3"
+                    android:hint="Комиссия на вывод (в%)"
+                    >
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/deposit_comission"
+                    android:inputType="numberPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+
+                    android:maxLength="3"
+                    android:hint="Комиссия на внесение (в%)"
                     >
 
                 </com.google.android.material.textfield.TextInputEditText>

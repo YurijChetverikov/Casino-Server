@@ -65,6 +65,7 @@
                 android:layout_marginTop="20dp"
                 ></View>
 
+<<<<<<< HEAD
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,11 +74,17 @@
                 android:text="Детали платежа:"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+=======
+>>>>>>> 2f82c78 (Stable version)
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Отправитель:"
                 android:textStyle="bold"
@@ -88,8 +95,13 @@
                 android:id="@+id/senderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="30dp"
+=======
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Отправитель:"
                 android:textColor="@color/black"
@@ -99,16 +111,26 @@
                 android:id="@+id/senderId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="30dp"
                 android:text="Отправитель:"
+=======
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:text=""
+>>>>>>> 2f82c78 (Stable version)
                 android:textColor="@color/theme_gray_3"
                 android:textSize="18sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="15dp"
                 android:text="Получатель:"
                 android:textStyle="bold"
@@ -119,8 +141,13 @@
                 android:id="@+id/receiverName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="30dp"
+=======
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Получатель:"
                 android:textColor="@color/black"
@@ -130,9 +157,15 @@
                 android:id="@+id/receiverId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="30dp"
                 android:text="Отправитель:"
+=======
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:text=""
+>>>>>>> 2f82c78 (Stable version)
                 android:textColor="@color/theme_gray_3"
                 android:textSize="18sp" />
 
@@ -140,7 +173,11 @@
                 android:id="@+id/senderAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="15dp"
                 android:text="Было отправлено:"
                 android:textColor="@color/black"
@@ -150,7 +187,11 @@
                 android:id="@+id/receiverAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Было получено:"
                 android:textColor="@color/black"
@@ -160,7 +201,11 @@
                 android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Тип:"
                 android:textColor="@color/black"
@@ -169,7 +214,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginHorizontal="30dp"
+=======
+                android:layout_marginHorizontal="20dp"
+>>>>>>> 2f82c78 (Stable version)
                 android:layout_marginTop="10dp"
                 android:text="Описание:"
                 android:textColor="@color/black"
@@ -179,10 +228,17 @@
                 android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="10dp"
                 android:text="Описание:"
+=======
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:text=""
+>>>>>>> 2f82c78 (Stable version)
                 android:maxLines="6"
                 android:maxLength="200"
                 android:ellipsize="end"
